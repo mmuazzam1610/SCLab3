@@ -59,18 +59,18 @@ public class Extract {
     	{ 
     		String men= tweets.get(i).getText();
     		if (men.contains("@")) {
-	    		String username= men.substring(men.indexOf('@') + 1, men.indexOf(' '));
+	    		String username= men.substring(men.indexOf('@') + 1);
+	    		username =  username.substring(0, username.indexOf(' '));
+	    		boolean valid = true;
 	    		for (Character c : username.toCharArray()) {
-	    			boolean valid = true;
-	              if (!Character.isLetterOrDigit(c) && !c.equals('-') && !c.equals('_')) 
-	              {
-	            	  valid = false;
-	              }
+	    			if (!Character.isLetterOrDigit(c) && !c.equals('-') && !c.equals('_')) 
+	    			{
+	    				valid = false;
+	    			}
 	    		}
-	    		mentioned.add(username);
+	    		if (valid) mentioned.add(username);
 	    	}
     	}
     	return mentioned;   
     }
-
 }
